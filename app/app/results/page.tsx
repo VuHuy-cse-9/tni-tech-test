@@ -10,13 +10,24 @@ export default function ResultsPage() {
   const [page, setPage] = useState(0);
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [imagePattern, setImagePattern] = useState('');
 
   useEffect(() => {
     const fetchResults = async () => {
       setLoading(true);
+
       try {
+        const params = new URLSearchParams({
+          limit: LIMIT.toString(),
+          offset: page.toString(),
+        });
+
+        if (imagePattern.trim()) {
+          params.append('image_pattern', imagePattern.trim());
+        }
+
         const res = await fetch(
-          `http://localhost:9988/results/?limit=${LIMIT}&offset=${page * LIMIT}`
+          `http://localhost:9988/results/?${params.toString()}`
         );
 
         if (!res.ok) throw new Error('Failed to load results');
@@ -32,13 +43,29 @@ export default function ResultsPage() {
     };
 
     fetchResults();
-  }, [page]);
+  }, [page, imagePattern]);
 
   return (
     <main style={{ padding: 40 }}>
       <Navbar />
 
       <h1>Detection Results</h1>
+
+      <input
+        type="text"
+        placeholder="Enter image name (e.g. 31e)"
+        value={imagePattern}
+        onChange={(e) => {
+          setPage(0); // reset to first page when filtering
+          setImagePattern(e.target.value);
+        }}
+        style={{
+          padding: 8,
+          marginBottom: 20,
+          width: 300,
+          display: 'block',
+        }}
+      />
 
       {loading ? (
         <p>Loading...</p>
