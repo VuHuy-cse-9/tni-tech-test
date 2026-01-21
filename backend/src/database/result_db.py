@@ -18,14 +18,7 @@ INSERT INTO public.{settings.postgresql_detection_results_table} (
 GET_DET_RESULTS = f"""
     SELECT created_at, det_box_count, vis_image_path
     FROM public.{settings.postgresql_detection_results_table}
-    ORDER BY created_at ASC
-    LIMIT :limit OFFSET :offset;
-"""
-
-GET_DET_RESULTS_WITH_IMAGE_PATTERN = f"""
-    SELECT created_at, det_box_count, vis_image_path
-    FROM public.{settings.postgresql_detection_results_table}
-    WHERE vis_image_path ILIKE :image_path
+    WHERE vis_image_path LIKE :image_path
     ORDER BY created_at ASC
     LIMIT :limit OFFSET :offset;
 """
@@ -84,8 +77,10 @@ async def fetch_detection_results(
     try:
         async with session_maker() as session:
             query = text(GET_DET_RESULTS)
-            result_proxy = await session.execute(query, {"limit": limit, "offset": offset})
-            rows = result_proxy.fetchall()
+            result_proxy = await session.execute(
+                query, 
+                {"limit": limit, "offset": offset, "image_path": f"%{image_path}%"})
+            rows =  result_proxy.fetchall()
             for row in rows:
                 results.append({
                     "created_at": row.created_at.isoformat(),

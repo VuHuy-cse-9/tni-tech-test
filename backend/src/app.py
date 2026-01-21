@@ -26,9 +26,9 @@ async def detect_image(image: UploadFile):  # noqa: D103
 
 
 @app.get("/results/", tags=["Root"])
-async def get_det_results(limit: int = 10, offset: int = 0):  # noqa: D103
+async def get_det_results(limit: int = 10, offset: int = 0, image_pattern: str = ""):  # noqa: D103
     try:
-        return await fetch_det_results(limit=limit, offset=offset)
+        return await fetch_det_results(limit=limit, offset=offset, image_pattern=image_pattern)
     except Exception as e:
         logger.error(f"Error in get_det_results: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
