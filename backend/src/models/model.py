@@ -22,7 +22,7 @@ class PersonDetectorEngine:
         bboxes = self.__postprocess(results)
         vis_image, vis_image_path = self.__save_visualize_image(image, bboxes, is_visualized)
         buffer = self.serialize_image(vis_image)
-        return ModelResponse(image_buffer=buffer, image_path=vis_image_path)
+        return ModelResponse(image_buffer=buffer, image_path=vis_image_path, bboxes=bboxes)
 
     def __setup(self):
         if not os.path.exists(self.save_dir):
@@ -35,7 +35,7 @@ class PersonDetectorEngine:
         results = self.model(image)
         return results
     
-    def __postprocess(self, results) -> list:
+    def __postprocess(self, results) -> list[Box]:
         bboxes = []
         for result in results:
             for box in result.boxes:
