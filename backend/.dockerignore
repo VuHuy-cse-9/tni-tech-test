@@ -1,0 +1,13 @@
+.venv
+**/.venv
+__pycache__
+**/__pycache__
+.env
+*.csv
+*.log
+!src/improvement-guidances.csv
+.coverage
+.idea/
+query_json_address.py
+src/py_service_toolkit
+notebook

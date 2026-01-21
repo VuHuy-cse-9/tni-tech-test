@@ -1,14 +1,29 @@
 services:
-  backend-service:
+  backend:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "9988:8000"
+      - "8000:8000"
     env_file:
       - .env
     volumes:
-      - ./outputs/:/app/outputs
+      - ./backend/outputs/:/app/outputs
+    networks:
+      - tni-network
+
+  frontend:
+    container_name: nextjs-frontend
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - "3005:3000"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - tni-network
 
 
   postgres:
@@ -32,6 +47,13 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - tni-network
 
 volumes:
   postgres_data:
+
+
+networks:
+  tni-network:
+    driver: bridge

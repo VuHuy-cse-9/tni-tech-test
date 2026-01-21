@@ -3,6 +3,9 @@
 import { useState } from 'react';
 import Navbar from './components/Navbar';
 
+
+const BACKEND_URL = 'http://localhost:8000';
+
 export default function Home() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -16,7 +19,7 @@ export default function Home() {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:9988/v1/detect', {
+      const res = await fetch(`${BACKEND_URL}/v1/detect`, {
         method: 'POST',
         body: formData,
       });
@@ -32,7 +35,7 @@ export default function Home() {
       setImageUrl(url);
     } catch (err) {
       console.error(err);
-      alert('Upload failed: ' + (err as Error).message);
+      alert('Upload failed: ' + BACKEND_URL + (err as Error).message);
     } finally {
       setLoading(false);
     }

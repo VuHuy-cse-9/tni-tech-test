@@ -3,8 +3,10 @@
 import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import ResultsTable from '../components/ResultsTable';
+import axios from 'axios';
 
 const LIMIT = 10;
+const BACKEND_URL = 'http://localhost:8000';
 
 export default function ResultsPage() {
   const [page, setPage] = useState(0);
@@ -26,17 +28,17 @@ export default function ResultsPage() {
           params.append('image_pattern', imagePattern.trim());
         }
 
-        const res = await fetch(
-          `http://localhost:9988/results/?${params.toString()}`
+        const res = await axios.get(
+          `${BACKEND_URL}/results/?${params.toString()}`
         );
 
-        if (!res.ok) throw new Error('Failed to load results');
+        if (res.status !== 200) throw new Error('Failed to load results');
 
-        const json = await res.json();
+        const json = res.data;
         setData(json);
       } catch (err) {
         console.error(err);
-        alert('Failed to load data');
+        alert('Failed to load data' + (err as Error).message + BACKEND_URL);
       } finally {
         setLoading(false);
       }
