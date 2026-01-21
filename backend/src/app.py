@@ -1,7 +1,9 @@
 from fastapi import FastAPI, UploadFile, HTTPException
 from services.core_service import detect_save_image
+from services.data_service import fetch_det_results
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
+from common.logging import logger
 
 app = FastAPI(title="House price evaluation gateway")
 app.add_middleware(
@@ -20,4 +22,14 @@ async def detect_image(image: UploadFile):  # noqa: D103
         return StreamingResponse(response, media_type="image/jpeg")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+
+
+@app.get("/results/", tags=["Root"])
+async def get_det_results(limit: int = 10, offset: int = 0):  # noqa: D103
+    try:
+        return await fetch_det_results(limit=limit, offset=offset)
+    except Exception as e:
+        logger.error(f"Error in get_det_results: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
     

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Navbar from './components/Navbar';
 
 export default function Home() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -39,6 +40,9 @@ export default function Home() {
 
   return (
     <main style={{ padding: 40 }}>
+
+      <Navbar />
+
       <input type="file" accept="image/*" onChange={handleUpload} />
 
       {loading && <p>Processing...</p>}

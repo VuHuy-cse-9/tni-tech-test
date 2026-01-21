@@ -1,4 +1,4 @@
 import logging
 
-logger = logging.getLogger("tni-tech-test")
-logger.setLevel(logging.INFO)
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)

@@ -15,6 +15,21 @@ INSERT INTO public.{settings.postgresql_detection_results_table} (
 );
 """
 
+GET_DET_RESULTS = f"""
+    SELECT created_at, det_box_count, vis_image_path
+    FROM public.{settings.postgresql_detection_results_table}
+    ORDER BY created_at ASC
+    LIMIT :limit OFFSET :offset;
+"""
+
+GET_DET_RESULTS_WITH_IMAGE_PATTERN = f"""
+    SELECT created_at, det_box_count, vis_image_path
+    FROM public.{settings.postgresql_detection_results_table}
+    WHERE vis_image_path ILIKE :image_path
+    ORDER BY created_at ASC
+    LIMIT :limit OFFSET :offset;
+"""
+
 def initialize_zoopla_db_engine():
     """
     Initialize Zoopla database engine and session maker.
@@ -57,3 +72,26 @@ async def save_detection_result_info(
     except Exception as e:
         logger.error(f"Error saving detection result info: {str(e)}")
         return None  # Don't raise, just log error
+    
+
+async def fetch_detection_results(
+    session_maker: async_sessionmaker[AsyncSession],
+    limit: int,
+    offset: int,
+    image_path: str
+) -> list[dict]:
+    results = []
+    try:
+        async with session_maker() as session:
+            query = text(GET_DET_RESULTS)
+            result_proxy = await session.execute(query, {"limit": limit, "offset": offset})
+            rows = result_proxy.fetchall()
+            for row in rows:
+                results.append({
+                    "created_at": row.created_at.isoformat(),
+                    "det_box_count": row.det_box_count,
+                    "vis_image_path": row.vis_image_path
+                })
+    except Exception as e:
+        logger.error(f"Error fetching detection results: {str(e)}")
+    return results
