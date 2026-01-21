@@ -1,7 +1,6 @@
 from database.result_db import db_session_maker, fetch_detection_results
 from schemas.data import DetResult, DataRequestSchema
 from marshmallow import ValidationError
-from common.logging import logger
 from fastapi import HTTPException
 
 def format_det_results(results: list[dict]) -> list[DetResult]:
@@ -29,5 +28,4 @@ async def fetch_det_results(
         offset=offset,
         image_path=image_pattern
     )
-    logger.info(results)
     return format_det_results(results)

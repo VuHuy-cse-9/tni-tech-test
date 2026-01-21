@@ -19,7 +19,7 @@ export default function ResultsPage() {
       try {
         const params = new URLSearchParams({
           limit: LIMIT.toString(),
-          offset: page.toString(),
+          offset: (page * LIMIT).toString(),
         });
 
         if (imagePattern.trim()) {
