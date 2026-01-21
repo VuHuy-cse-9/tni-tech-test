@@ -1,0 +1,49 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9">
+  <diagram name="Page-1" id="8W8rWpyXiAl-dYa4xwh1">
+    <mxGraphModel dx="754" dy="470" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="_75_ulx_KstvkEg7Z5Tr-2" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="340" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_75_ulx_KstvkEg7Z5Tr-3" value="Frontend&lt;div&gt;(Nest.js)&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="205" y="410" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="_75_ulx_KstvkEg7Z5Tr-4" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="325" width="310" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="_75_ulx_KstvkEg7Z5Tr-5" value="Backend&lt;div&gt;(FastAPI)&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="480" y="420" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="_75_ulx_KstvkEg7Z5Tr-6" value="validate&lt;div&gt;(Marshallow)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="350" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="_75_ulx_KstvkEg7Z5Tr-7" value="model&lt;div&gt;(utralytics)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="470" y="350" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="_75_ulx_KstvkEg7Z5Tr-8" value="backend&lt;div&gt;(sqlachemy)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="350" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="_75_ulx_KstvkEg7Z5Tr-9" value="DB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="735" y="330" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_75_ulx_KstvkEg7Z5Tr-10" value="PostgreSQL" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="720" y="420" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_75_ulx_KstvkEg7Z5Tr-11" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="_75_ulx_KstvkEg7Z5Tr-2" target="_75_ulx_KstvkEg7Z5Tr-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="470" y="390" as="sourcePoint" />
+            <mxPoint x="520" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_75_ulx_KstvkEg7Z5Tr-12" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="_75_ulx_KstvkEg7Z5Tr-8" target="_75_ulx_KstvkEg7Z5Tr-9">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="580" y="390" as="sourcePoint" />
+            <mxPoint x="630" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
